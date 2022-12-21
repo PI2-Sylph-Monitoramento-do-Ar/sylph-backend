@@ -1,0 +1,25 @@
+version: '3'
+
+services: 
+  api:
+    build: .
+    command: yarn dev
+    links: 
+      - mongo
+    depends_on: 
+      - mongo
+    ports: 
+      - "5050:5050"
+      - "9222:9222"
+    volumes: 
+      - .:/usr/src/
+      - /usr/src/node_modules
+    env_file:
+      - .env
+  mongo:
+    restart: always 
+    image: mongo:4.2.9-bionic
+    ports:
+      - '27017:27017'
+    volumes:
+      - ./mongo:/data/db
