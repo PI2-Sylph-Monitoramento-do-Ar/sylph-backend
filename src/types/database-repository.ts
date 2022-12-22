@@ -1,4 +1,4 @@
-import { Model } from "./schema"
+import { Model } from "./model"
 
 export interface IDatabaseRepository {
     findAll: <T extends Model>() => Promise<T[]>

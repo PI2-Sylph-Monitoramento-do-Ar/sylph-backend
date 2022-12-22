@@ -1,7 +1,6 @@
 import { Collection } from "mongodb";
 import { Database } from "_/config/database";
-import { IDatabaseRepository } from "_/types/database-repository";
-import { Model } from "_/types/schema";
+import { IDatabaseRepository, Model } from "_/types";
 
 export class DatabaseRepository implements IDatabaseRepository {
     private databaseSingleton = Database.getInstance()
