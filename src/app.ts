@@ -1,12 +1,15 @@
-import express from 'express'
+import express, { Router, Express } from 'express'
 
 import { Database } from "_/config/database";
 import { contentType, bodyparser, cors, requestInfo } from "_/middlewares"
 import { envs } from "_/config/env";
+import { setMeasurementRoutes } from '_/routes';
+
+
 
 export class App {
     private databaseSingleton: Database = Database.getInstance()
-    public app = express()
+    public app: Express = express()
 
     constructor(){
         this.init()
@@ -26,9 +29,9 @@ export class App {
     }
 
     setRoutes(){
-        this.app.use('', (req, res) => {
-            res.send("server is running!")
-        })
+        const router = Router()
+        this.app.use('/api', router)
+        setMeasurementRoutes(router)
     }
 }
 
