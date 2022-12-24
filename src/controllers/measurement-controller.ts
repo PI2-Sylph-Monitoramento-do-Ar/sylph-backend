@@ -10,6 +10,7 @@ export class MeasurementController implements Record<keyof MeasurementController
         private readonly measurementDatabaseRepository: DatabaseRepository
     ){}
    
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     async listMeasurement(httpRequest: HttpRequest): Promise<HttpResponse> {
         // this is mocked. When trully developed, it should call database respository to get the measurements
         return ok([{

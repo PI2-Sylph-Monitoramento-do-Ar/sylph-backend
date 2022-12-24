@@ -6,6 +6,7 @@ export class Database {
 
     private client: MongoClient
 
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     private constructor() {} // prevents initialization with new operator outside of the class 
 
     public static getInstance(){ 
