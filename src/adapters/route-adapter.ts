@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
 import { ControllerMethod, HttpRequest } from '_/types'
 
-/* adapter to adapt the response of express to the controller we're using 
+/* adapter to adapt the response of express to the controller we're using
    it helps to treat errors in our application
 */
 export const adaptRoute = (controller: ControllerMethod) => {
@@ -15,7 +15,7 @@ export const adaptRoute = (controller: ControllerMethod) => {
       res.status(httpResponse.statusCode).json(httpResponse.body)
     } else {
       res.status(httpResponse.statusCode).json({
-        error: httpResponse.body.message
+        error: httpResponse.body
       })
     }
   }

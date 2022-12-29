@@ -4,6 +4,7 @@ import { Database } from "_/config/database";
 import { contentType, bodyparser, cors, requestInfo } from "_/middlewares"
 import { envs } from "_/config/env";
 import { setMeasurementRoutes } from '_/routes';
+import { setTotemRoutes } from './routes/totem-route';
 
 
 
@@ -32,6 +33,7 @@ export class App {
         const router = Router()
         this.app.use('/api', router)
         setMeasurementRoutes(router)
+        setTotemRoutes(router)
     }
 }
 
