@@ -1,4 +1,4 @@
 export type Model = {
-    id: string
+    _id: string
     [key: string]: any;
 }
