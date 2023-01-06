@@ -1,7 +1,7 @@
 
-import { Measurement, MeasurementDto } from "_/types"
+import { Measurement, MeasurementDto } from "_/models"
 
-export const mapBodyToMeasurement = (body: MeasurementDto): Measurement => {
+export const mapBodyToMeasurement = (body: MeasurementDto): Omit<Measurement, '_id'> => {
     const { totem_id,
             temperature,
             humidity,
