@@ -1,12 +1,11 @@
 import { ok, created } from "_/helpers/http-helpers";
 import { mapBodyToTotem } from "_/helpers/map-body-to-totem";
 import { DatabaseRepository } from "_/repositories/database";
-import { HttpRequest, HttpResponse, ControllerMethod } from "_/types";
+import { HttpRequest, HttpResponse, Controller } from "_/types";
 
 /** Record<keyof TotemController, ControllerMethods> makes sure every method in the controller class have the same params and return type */
 
-export class TotemController implements Record<keyof TotemController, ControllerMethod> {
-
+export class TotemController implements Controller<TotemController>{
     private readonly totemDatabaseRepository: DatabaseRepository
 
     constructor(_totemDatabaseRepository: DatabaseRepository){
@@ -21,8 +20,7 @@ export class TotemController implements Record<keyof TotemController, Controller
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     async listTotem(httpRequest: HttpRequest): Promise<HttpResponse> {
-        console.log(this.totemDatabaseRepository);
         const totems = await this.totemDatabaseRepository.findAll();
-        return ok({totems})
+        return ok(totems)
     }
 }
