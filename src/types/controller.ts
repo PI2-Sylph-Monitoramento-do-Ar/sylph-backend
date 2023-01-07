@@ -1,3 +1,4 @@
-import { HttpRequest, HttpResponse } from "./http";
+import { HttpRequest, HttpResponse, HttpRequestParams } from "./http";
 
-export type ControllerMethod = (httpRequest: HttpRequest) => Promise<HttpResponse>
+export type Controller<T> = Record<keyof T, ControllerMethod>
+export type ControllerMethod = (httpRequest: HttpRequest, httpRequestParams?: HttpRequestParams ) => Promise<HttpResponse>
