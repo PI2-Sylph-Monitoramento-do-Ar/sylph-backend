@@ -11,6 +11,6 @@ export function setMeasurementRoutes (router: Router){
     const measurementControtroller = new MeasurementController(measurementDatabaseRepository, totemDatabaseRepository)
 
     // ROUTES
-    router.get('/measurements', adaptRoute(measurementControtroller.listMeasurement.bind(measurementControtroller)))
-    router.post('/measurements', adaptRoute(measurementControtroller.createMeasurement.bind(measurementControtroller)))
+    router.get('/measurements', adaptRoute(measurementControtroller.listMeasurement, measurementControtroller))
+    router.post('/measurements', adaptRoute(measurementControtroller.createMeasurement, measurementControtroller))
 }

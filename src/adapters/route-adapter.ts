@@ -1,10 +1,12 @@
 import { Request, Response } from 'express'
-import { ControllerMethod, HttpRequest, HttpRequestParams } from '_/types'
+import { Controller, ControllerMethod, HttpRequest, HttpRequestParams } from '_/types'
 
 /* adapter to adapt the response of express to the controller we're using.
    it helps to treat errors in our application
 */
-export const adaptRoute = (controller: ControllerMethod) => {
+export const adaptRoute = (method: ControllerMethod, controller: Controller) => {
+  const bindedMethod = method.bind(controller)
+  
   return async (req: Request, res: Response): Promise<void> => {
     const httpRequest: HttpRequest = {
       body: req.body,
@@ -14,7 +16,7 @@ export const adaptRoute = (controller: ControllerMethod) => {
       query: req.query
     }
 
-    const httpResponse = await controller(httpRequest, httpRequestParams)
+    const httpResponse = await bindedMethod(httpRequest, httpRequestParams)
 
     if (httpResponse.statusCode >= 200 && httpResponse.statusCode <= 299) {
       res.status(httpResponse.statusCode).json(httpResponse.body)

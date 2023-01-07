@@ -9,7 +9,8 @@ export function setTotemRoutes (router: Router){
     const totemControtroller = new TotemController(totemDatabaseRepository)
 
     // ROUTES
-    router.get('/totems', adaptRoute(totemControtroller.listTotem.bind(totemControtroller)))
-    router.post('/totems', adaptRoute(totemControtroller.createTotem.bind(totemControtroller)))
-    router.delete('/totems/:totem_id', adaptRoute(totemControtroller.deleteTotem.bind(totemControtroller)))
+    router.get('/totems', adaptRoute(totemControtroller.listTotem, totemControtroller))
+    router.post('/totems', adaptRoute(totemControtroller.createTotem, totemControtroller))
+    router.delete('/totems/:totem_id', adaptRoute(totemControtroller.deleteTotem, totemControtroller))
+    router.get('/totems/:totem_id', adaptRoute(totemControtroller.findTotem, totemControtroller))
 }
