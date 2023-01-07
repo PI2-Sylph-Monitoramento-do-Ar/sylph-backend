@@ -2,7 +2,7 @@ import * as httpStatus from "_/helpers/http-helpers";
 import { mapBodyToTotem } from "_/helpers/map-body-to-totem";
 import { Totem, TotemDto } from "_/models";
 import { HttpRequest, HttpResponse, Controller, IDatabaseRepository, HttpRequestParams } from "_/types";
-import { DeleteTotemParams } from "./types";
+import { DeleteTotemParams, FindTotemParams } from "./types";
 
 export class TotemController implements Controller<TotemController>{
     
@@ -37,7 +37,7 @@ export class TotemController implements Controller<TotemController>{
         }
     }
 
-    async findTotem(_: HttpRequest, httpParams: HttpRequestParams<DeleteTotemParams>): Promise<HttpResponse> {
+    async findTotem(_: HttpRequest, httpParams: HttpRequestParams<FindTotemParams>): Promise<HttpResponse> {
         try {
             const { totem_id } = httpParams.params            
             const totem = await this.totemDatabaseRepository.findOne<Totem>({ id: totem_id })
