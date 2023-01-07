@@ -12,7 +12,7 @@ export class DatabaseRepository implements IDatabaseRepository {
 
     async findAll<T extends Model>(): Promise<T[]>{
         const response = await this.collection.find().toArray()
-        return response  as T[]
+        return response as unknown  as T[]
     }
 
 
@@ -22,17 +22,16 @@ export class DatabaseRepository implements IDatabaseRepository {
     }
 
 
-    async create<T extends Omit<Model, '_id'>>(data:T): Promise<void>{
-        const response = await this.collection.insertOne(data)
-        console.log({ response })
+    async create<T extends Model>(data:T): Promise<void>{
+        await this.collection.insertOne(data)
     }
 
-    async update<T extends Omit<Model, '_id'>>(id: string, data: Partial<T>){
-        await this.collection.updateOne({ _id: id }, data)
+    async update<T extends Model>(id: string, data: Partial<T>){
+        await this.collection.updateOne({ id }, data)
     }
 
     async delete(id: string): Promise<void>{
-        await this.collection.deleteOne({_id: id})
+        await this.collection.deleteOne({ id })
     }
 
 }
