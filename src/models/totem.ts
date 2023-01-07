@@ -1,14 +1,17 @@
 import { Model } from "_/types"
 
+interface Location {
+    latitude: number; 
+    longitute: number;
+}
 export interface Totem  extends Model {
-    _id: string,
-    mac_addres: string,
+    mac_address: string,
     is_active: boolean,
-    location: number[]
+    location: Location
 }
 
 export type TotemDto = {
-    mac_addres: string,
+    mac_address: string,
     is_active: boolean,
-    location: number[]
+    location: Location
 }
