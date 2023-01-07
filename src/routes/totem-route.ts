@@ -11,4 +11,5 @@ export function setTotemRoutes (router: Router){
     // ROUTES
     router.get('/totems', adaptRoute(totemControtroller.listTotem.bind(totemControtroller)))
     router.post('/totems', adaptRoute(totemControtroller.createTotem.bind(totemControtroller)))
+    router.delete('/totems/:totem_id', adaptRoute(totemControtroller.deleteTotem.bind(totemControtroller)))
 }
