@@ -1,11 +1,13 @@
 
-import { Totem } from "_/models"
+import { Totem, TotemDto } from "_/models"
+import { genereateId } from "./generate-id";
 
-export const mapBodyToTotem = (body: object): Omit<Totem, '_id'> => {
-    const { mac_addres, location, is_active } = body as Totem;
-    
+export const mapBodyToTotem = (body: TotemDto): Totem => {
+    const { mac_address, location, is_active } = body as Totem;
+
     return {
-        mac_addres,
+        id: genereateId(),
+        mac_address,
         location,
         is_active
     }
