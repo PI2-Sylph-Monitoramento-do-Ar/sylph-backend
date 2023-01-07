@@ -1,7 +1,8 @@
 
 import { Measurement, MeasurementDto } from "_/models"
+import { genereateId } from "./generate-id";
 
-export const mapBodyToMeasurement = (body: MeasurementDto): Omit<Measurement, '_id'> => {
+export const mapBodyToMeasurement = (body: MeasurementDto): Measurement => {
     const { totem_id,
             temperature,
             humidity,
@@ -11,6 +12,7 @@ export const mapBodyToMeasurement = (body: MeasurementDto): Omit<Measurement, '_
             particulate_matter_level
         } = body;
     return {
+        id: genereateId(),
         totem_id,
         temperature,
         humidity,
