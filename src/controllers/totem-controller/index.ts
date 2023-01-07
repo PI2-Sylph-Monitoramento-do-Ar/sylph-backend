@@ -22,7 +22,7 @@ export class TotemController implements Controller<TotemController>{
         try {
             const totems = await this.totemDatabaseRepository.findAll();
             return httpStatus.ok(totems)
-        } catch(error){``
+        } catch(error){
             return httpStatus.serverError(error)
         }
     }
