@@ -1,26 +1,28 @@
-import { ok, created } from "_/helpers/http-helpers";
+import * as httpStatus from "_/helpers/http-helpers";
 import { mapBodyToTotem } from "_/helpers/map-body-to-totem";
-import { DatabaseRepository } from "_/repositories/database";
-import { HttpRequest, HttpResponse, Controller } from "_/types";
-
-/** Record<keyof TotemController, ControllerMethods> makes sure every method in the controller class have the same params and return type */
+import { TotemDto } from "_/models";
+import { HttpRequest, HttpResponse, Controller, IDatabaseRepository } from "_/types";
 
 export class TotemController implements Controller<TotemController>{
-    private readonly totemDatabaseRepository: DatabaseRepository
+    
+    constructor(private readonly totemDatabaseRepository: IDatabaseRepository){}
 
-    constructor(_totemDatabaseRepository: DatabaseRepository){
-        this.totemDatabaseRepository = _totemDatabaseRepository
-    }
-
-    async createTotem(httpRequest: HttpRequest): Promise<HttpResponse>{
-
-        await this.totemDatabaseRepository.create(mapBodyToTotem(httpRequest.body));
-        return created();
+    async createTotem(httpRequest: HttpRequest<TotemDto>): Promise<HttpResponse>{
+        try {
+            await this.totemDatabaseRepository.create(mapBodyToTotem(httpRequest.body));
+            return httpStatus.created();
+        } catch(error){
+            return httpStatus.serverError(error)
+        }
     }
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    async listTotem(httpRequest: HttpRequest): Promise<HttpResponse> {
-        const totems = await this.totemDatabaseRepository.findAll();
-        return ok(totems)
+    async listTotem(_: HttpRequest): Promise<HttpResponse> {
+        try {
+            const totems = await this.totemDatabaseRepository.findAll();
+            return httpStatus.ok(totems)
+        } catch(error){
+            return httpStatus.serverError(error)
+        }
     }
 }
