@@ -1,6 +1,7 @@
 import { Collection } from "mongodb";
 import { Database } from "_/config/database";
 import { IDatabaseRepository, Model } from "_/types";
+import { isObjectEmpty } from "_/utils/is-object-empty";
 
 export class DatabaseRepository implements IDatabaseRepository {
     private databaseSingleton = Database.getInstance()
@@ -10,8 +11,9 @@ export class DatabaseRepository implements IDatabaseRepository {
         this.collection = this.databaseSingleton.getCollection(collectionName)
     }
 
-    async findAll<T extends Model>(): Promise<T[]>{
-        const response = await this.collection.find().toArray()
+    async findAll<T extends Model>(args?: Partial<T>): Promise<T[]>{
+        if(isObjectEmpty(args)) args = null
+        const response = await this.collection.find(args).toArray()
         return response as unknown  as T[]
     }
 

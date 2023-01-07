@@ -1,7 +1,9 @@
 import * as httpStatus from "_/helpers/http-helpers";
 import { mapBodyToMeasurement } from "_/helpers/map-body-to-measurement";
-import { HttpRequest, HttpResponse, Controller, IDatabaseRepository } from "_/types";
-import { MeasurementDto, Totem } from "_/models"
+import { HttpRequest, HttpResponse, Controller, IDatabaseRepository, HttpRequestParams } from "_/types";
+import { Measurement, MeasurementDto, Totem } from "_/models"
+import {FindMeasurementQuery} from './types'
+
 export class MeasurementController implements Controller<MeasurementController> {
 
     constructor(
@@ -23,10 +25,11 @@ export class MeasurementController implements Controller<MeasurementController> 
     }
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    async listMeasurement(_: HttpRequest): Promise<HttpResponse> {
+    async listMeasurement(_: HttpRequest, httpParams: HttpRequestParams<null, FindMeasurementQuery>): Promise<HttpResponse> {
         try {
-            const measurements = await this.measurementDatabaseRepository.findAll();
-            return httpStatus.ok({ measurements })
+            const query = httpParams.query
+            const measurements = await this.measurementDatabaseRepository.findAll<Measurement>(query);
+            return httpStatus.ok(measurements)
         } catch(error){
             return httpStatus.serverError(error)
         }
