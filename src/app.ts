@@ -5,6 +5,7 @@ import { contentType, bodyparser, cors, requestInfo } from "_/middlewares"
 import { envs } from "_/config/env";
 import { setMeasurementRoutes } from '_/routes';
 import { setTotemRoutes } from './routes/totem-route';
+import { setMqttServices } from './services';
 
 
 
@@ -20,6 +21,7 @@ export class App {
         await this.databaseSingleton.connect(envs.mongoUrl)
         this.setUpMiddlewares()
         this.setRoutes()
+        this.setServices()
     }
 
     setUpMiddlewares(){
@@ -34,6 +36,10 @@ export class App {
         this.app.use('/api', router)
         setMeasurementRoutes(router)
         setTotemRoutes(router)
+    }
+
+    setServices(){
+        setMqttServices()
     }
 }
 

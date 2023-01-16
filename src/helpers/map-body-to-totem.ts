@@ -3,7 +3,7 @@ import { Totem, TotemDto } from "_/models"
 import { genereateId } from "./generate-id";
 
 export const mapBodyToTotem = (body: TotemDto): Totem => {
-    const { mac_address, location, is_active } = body as Totem;
+    const { mac_address, location, is_active } = body;
 
     return {
         id: genereateId(),
