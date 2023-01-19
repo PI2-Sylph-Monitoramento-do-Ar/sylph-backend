@@ -12,7 +12,8 @@
   },
   "scripts": {
     "dev": "nodemon -e ts,js --exec ts-node -r tsconfig-paths/register src/server.ts", 
-    "lint": "eslint . --ext .ts"
+    "lint": "eslint . --ext .ts", 
+    "seed": "ts-node -r tsconfig-paths/register src/seeds/index.ts"
   },
   "devDependencies": {
     "@types/express": "^4.17.15",
