@@ -8,8 +8,10 @@
   "dependencies": {
     "express": "^4.18.2",
     "mongodb": "^4.13.0",
+    "mqtt": "^4.3.7",
+    "tsconfig-paths": "^4.1.1",
     "tsc-alias": "^1.8.2",
-    "tsconfig-paths": "^4.1.1"
+    "zod": "^3.20.2"
   },
   "scripts": {
     "dev": "nodemon -e ts,js --exec ts-node -r tsconfig-paths/register src/server.ts",

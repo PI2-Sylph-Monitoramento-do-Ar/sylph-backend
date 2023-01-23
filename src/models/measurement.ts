@@ -11,6 +11,7 @@ export interface Measurement extends Model {
 }
 
 export type MeasurementDto = {
+    id?: string,
     totem_id: string,
     temperature: number,
     humidity: number,
