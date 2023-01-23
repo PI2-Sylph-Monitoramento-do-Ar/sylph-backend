@@ -24,7 +24,11 @@ export class DatabaseRepository implements IDatabaseRepository {
     }
 
 
-    async create<T extends Model>(data:T): Promise<void>{
+    async create<T extends Model>(data:T | T[]): Promise<void>{
+        if(Array.isArray(data)){
+            await this.collection.insertMany(data)
+            return
+        }
         await this.collection.insertOne(data)
     }
 
