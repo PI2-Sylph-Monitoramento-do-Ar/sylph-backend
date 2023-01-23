@@ -15,7 +15,7 @@ const createMeasurements = async () => {
     const measurementDatabaseRepository = new DatabaseRepository(COLLECTIONS.MEASUREMENTS)
     const promisses = totems.map(async (totem) => {
         const measurements = gerenerateMeasurements(totem) 
-        await measurementDatabaseRepository.create<Measurement>(measurements)
+        measurementDatabaseRepository.create<Measurement>(measurements)
     })
     await Promise.all(promisses)
 }
