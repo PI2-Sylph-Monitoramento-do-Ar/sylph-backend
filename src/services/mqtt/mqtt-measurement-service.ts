@@ -12,6 +12,7 @@ export class MeasurementMqttService implements MqttService{
     ){}
     
     watch(){
+
         this.mqttMeasurement.onMessage<MeasurementDto>(async (data) => {
             const totem = await this.totemDatabaseRepository.findOne({ id: data.totem_id })
             if(!totem) {

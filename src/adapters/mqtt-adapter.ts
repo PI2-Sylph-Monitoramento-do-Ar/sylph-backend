@@ -1,4 +1,5 @@
 import mqtt from "mqtt"
+import { envs } from "_/config/env"
 
 export interface MqttAdatper {
     publish: <T>(data: T) => void
@@ -7,8 +8,8 @@ export interface MqttAdatper {
 
 export class MqttAdatperImp implements MqttAdatper {
 
-    private client: mqtt.MqttClient = mqtt.connect(process.env.MQTT_URI, {
-        clientId: process.env.MQTT_CLIENT_ID
+    private client: mqtt.MqttClient = mqtt.connect(envs.mqttUrl, {
+        clientId: envs.mqttClientId
     })
 
     constructor(private readonly topic: string){
@@ -16,11 +17,15 @@ export class MqttAdatperImp implements MqttAdatper {
     }
 
     private init(){
-        this.client.subscribe(this.topic)
+        this.client.subscribe(this.topic, (e) => {
+            if(e) console.error(`Could not subscribe to topic: ${this.topic}`, e)
+        })
     }
 
     publish<T>(data: T) {
-        this.client.publish(this.topic, JSON.stringify(data))
+        this.client.publish(this.topic, JSON.stringify(data), (e) => {
+            if(e) console.error(`Message not sent in topic: ${this.topic}`, e)
+        })
     }
 
     onMessage<T>(cb: (data: T) => void){

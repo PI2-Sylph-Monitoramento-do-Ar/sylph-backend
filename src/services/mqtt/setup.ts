@@ -8,6 +8,8 @@ import { MeasurementMqttService } from "./mqtt-measurement-service"
 export const setMqttServices = () => {
     const mqttMeasurementService = makeMqttMeasurementService()
     mqttMeasurementService.watch()
+
+    console.log("Mqtt listeners set.")
 }
 
 
