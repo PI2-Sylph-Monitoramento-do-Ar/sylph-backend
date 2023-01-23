@@ -45,3 +45,12 @@ make build
 ````
 make up
 ````
+
+
+## Seeds
+
+Para executar o seeds do banco de dados basta rodar, com o programa em execução e em uma aba separada, o comando: 
+
+````
+make seed
+````
