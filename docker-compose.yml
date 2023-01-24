@@ -23,3 +23,17 @@ services:
       - '27017:27017'
     volumes:
       - ./mongo:/data/db
+      
+  mqtt_broker:
+    container_name: mqtt_broker
+    image: emqx/emqx
+    ports:
+      - 1883:1883
+      - 8081:8081
+      - 8083:8083
+      - 8084:8084
+      - 8883:8883
+      - 18083:18083
+    environment:
+      - EMQX_NAME=mqtt_broker
+      - EMQX_HOST=localhost

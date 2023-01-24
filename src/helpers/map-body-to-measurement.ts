@@ -3,7 +3,9 @@ import { Measurement, MeasurementDto } from "_/models"
 import { genereateId } from "./generate-id";
 
 export const mapBodyToMeasurement = (body: MeasurementDto): Measurement => {
-    const { totem_id,
+    const { 
+            id,
+            totem_id,
             temperature,
             humidity,
             date_time,
@@ -12,7 +14,7 @@ export const mapBodyToMeasurement = (body: MeasurementDto): Measurement => {
             particulate_matter_level
         } = body;
     return {
-        id: genereateId(),
+        id: id || genereateId(),
         totem_id,
         temperature,
         humidity,

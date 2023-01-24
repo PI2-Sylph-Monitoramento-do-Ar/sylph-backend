@@ -16,8 +16,18 @@ Antes de executar o projeto, você deve ter instalado:
 Na pasta raiz de seu projeto, crie um arquivo .env com o conteúdo a seguir: 
 
 ````
-MONGO_URL=mongodb://mongo:27017/sylph
-PORT=5050
+# SERVER
+PORT=
+
+# DATABASE
+MONGO_URL=
+
+#MQTT
+MQTT_HOST=
+MQTT_PORT=
+MQTT_PROTOCOL=
+MQTT_USERNAME=
+MQTT_PASSWORD=
 ````
 
 ## Execução
@@ -34,4 +44,13 @@ make build
 
 ````
 make up
+````
+
+
+## Seeds
+
+Para executar o seeds do banco de dados basta rodar, com o programa em execução e em uma aba separada, o comando: 
+
+````
+make seed
 ````
