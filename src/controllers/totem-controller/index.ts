@@ -11,7 +11,6 @@ export class TotemController implements Controller<TotemController>{
 
     async createTotem(httpRequest: HttpRequest<TotemDto, TotemHeaders>): Promise<HttpResponse>{
         try {
-            console.log({ httpRequest })
             const { email } = httpRequest.headers
             await this.totemDatabaseRepository.create(mapBodyToTotem(httpRequest.body, email));
             return httpStatus.created();
