@@ -10,7 +10,9 @@ export const adaptRoute = (method: ControllerMethod, controller: Controller) => 
   return async (req: Request, res: Response): Promise<void> => {
     const httpRequest: HttpRequest = {
       body: req.body,
+      headers: req.headers
     }
+    
     const httpRequestParams: HttpRequestParams = {
       params: req.params, 
       query: req.query
