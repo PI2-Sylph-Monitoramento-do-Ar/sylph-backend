@@ -14,7 +14,8 @@ export class AuthMiddleware implements Middleware {
             if(!bearerToken) return unauthorized()
             
             const token = bearerToken.split(' ')[1]
-
+            
+            if(!bearerToken) return unauthorized()
             const { email } = await admin.auth().verifyIdToken(token)
 
             return ok({ email })
