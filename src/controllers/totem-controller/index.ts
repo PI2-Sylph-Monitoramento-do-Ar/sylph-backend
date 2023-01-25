@@ -2,7 +2,7 @@ import * as httpStatus from "_/helpers/http-helpers";
 import { mapBodyToTotem } from "_/helpers/map-body-to-totem";
 import { Totem, TotemDto } from "_/models";
 import { HttpRequest, HttpResponse, Controller, IDatabaseRepository, HttpRequestParams } from "_/types";
-import { DeleteTotemParams, FindTotemParams } from "./types";
+import { DeleteTotemParams, FindTotemParams, ListTotemQuery } from "./types";
 
 export class TotemController implements Controller<TotemController>{
     
@@ -18,9 +18,10 @@ export class TotemController implements Controller<TotemController>{
     }
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    async listTotem(_: HttpRequest): Promise<HttpResponse> {
+    async listTotem(_: HttpRequest, params: HttpRequestParams<null, ListTotemQuery>): Promise<HttpResponse> {
         try {
-            const totems = await this.totemDatabaseRepository.findAll();
+            const { query } = params
+            const totems = await this.totemDatabaseRepository.findAll(query);
             return httpStatus.ok(totems)
         } catch(error){
             return httpStatus.serverError(error)
