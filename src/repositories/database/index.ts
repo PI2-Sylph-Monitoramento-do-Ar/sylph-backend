@@ -13,13 +13,13 @@ export class DatabaseRepository implements IDatabaseRepository {
 
     async findAll<T extends Model>(args?: Partial<T>): Promise<T[]>{
         if(isObjectEmpty(args)) args = null
-        const response = await this.collection.find(args).toArray()
+        const response = await this.collection.find(args, { projection: { _id: 0 }}).toArray()
         return response as unknown  as T[]
     }
 
 
     async findOne<T extends Model>(options: Partial<T>): Promise<T> {
-        const response = await this.collection.findOne(options)
+        const response = await this.collection.findOne(options, { projection: { _id: 0 }})
         return response as unknown as T
     }
 
