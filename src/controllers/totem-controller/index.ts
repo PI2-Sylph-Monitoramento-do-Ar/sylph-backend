@@ -1,16 +1,19 @@
+import { AccessDeniedError } from "_/errors";
 import * as httpStatus from "_/helpers/http-helpers";
 import { mapBodyToTotem } from "_/helpers/map-body-to-totem";
 import { Totem, TotemDto } from "_/models";
 import { HttpRequest, HttpResponse, Controller, IDatabaseRepository, HttpRequestParams } from "_/types";
-import { DeleteTotemParams, FindTotemParams } from "./types";
+import { DeleteTotemParams, FindTotemParams, TotemHeaders } from "./types";
 
 export class TotemController implements Controller<TotemController>{
     
     constructor(private readonly totemDatabaseRepository: IDatabaseRepository){}
 
-    async createTotem(httpRequest: HttpRequest<TotemDto>): Promise<HttpResponse>{
+    async createTotem(httpRequest: HttpRequest<TotemDto, TotemHeaders>): Promise<HttpResponse>{
         try {
-            await this.totemDatabaseRepository.create(mapBodyToTotem(httpRequest.body));
+            console.log({ httpRequest })
+            const { email } = httpRequest.headers
+            await this.totemDatabaseRepository.create(mapBodyToTotem(httpRequest.body, email));
             return httpStatus.created();
         } catch(error){
             return httpStatus.serverError(error)
@@ -27,9 +30,16 @@ export class TotemController implements Controller<TotemController>{
         }
     }
 
-    async deleteTotem(_: HttpRequest, httpParams: HttpRequestParams<DeleteTotemParams>): Promise<HttpResponse> {
+    async deleteTotem(httpRequest: HttpRequest<null, TotemHeaders>, httpParams: HttpRequestParams<DeleteTotemParams>): Promise<HttpResponse> {
         try {
-            const { totem_id } = httpParams.params            
+            const { totem_id } = httpParams.params  
+            const { email } = httpRequest.headers   
+
+            const totem = await this.totemDatabaseRepository.findOne<Totem>({id: totem_id})
+            
+            if(totem.email !== email) 
+                return httpStatus.forbidden(new AccessDeniedError())
+        
             await this.totemDatabaseRepository.delete(totem_id)
             return httpStatus.noContent()
         } catch(error){
