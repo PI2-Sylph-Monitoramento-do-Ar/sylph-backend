@@ -6,8 +6,10 @@
   "author": "GabrielDvPereira <gdavi.gd@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "@types/lodash": "^4.14.191",
     "express": "^4.18.2",
     "firebase-admin": "^11.5.0",
+    "lodash": "^4.17.21",
     "mongodb": "^4.13.0",
     "mqtt": "^4.3.7",
     "tsc-alias": "^1.8.2",
