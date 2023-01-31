@@ -9,10 +9,12 @@ export interface Totem  extends Model {
     is_active: boolean,
     location: Location, 
     email: string
+    name: string
 }
 
 export type TotemDto = {
     mac_address: string,
     is_active: boolean,
-    location: Location
+    location: Location,
+    name: string
 }
