@@ -42,6 +42,7 @@ export type MeasurementMqttDTO = {
     humidity?: string
     key: string
     datetime: string
+    totem_id: string
 }
 
 

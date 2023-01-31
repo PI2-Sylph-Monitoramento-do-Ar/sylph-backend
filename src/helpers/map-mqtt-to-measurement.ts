@@ -13,13 +13,14 @@ export const mapMqttToMeasurement = (measurementDto: MeasurementMqttDTO): Measur
         pressure, 
         smoke, 
         temperature, 
-        humidity
+        humidity, 
+        totem_id
     } = measurementDto
 
     const measurement =  {
         date_time: new Date(datetime), 
         id: key, 
-        totem_id: "fe4959cc-6035-47d1-80d3-d56ea423bb39", 
+        totem_id, 
         altitude: tryParseNumber(altitude), 
         ammonia: tryParseNumber(nh3), 
         carbon_dioxide_level: tryParseNumber(co2), 

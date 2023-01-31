@@ -20,7 +20,7 @@ export class MeasurementMqttService implements MqttService{
                 return
             }
             await this.measurementDatabaseRepository.update<Measurement>(measurement.id, measurement, { createItNotExists: true })
-            console.log("measurement added.")
+            console.log("measurement added.", data)
         })        
     }
 }
