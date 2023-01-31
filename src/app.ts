@@ -1,4 +1,4 @@
-import express, { Router, Express } from 'express'
+import express, { Router, Express, json } from 'express'
 import { initFirebase }  from "_/config/firebase"
 import { Database } from "_/config/database";
 import { contentType, bodyparser, cors, requestInfo } from "_/middlewares"

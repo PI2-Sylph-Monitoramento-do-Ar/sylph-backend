@@ -3,6 +3,7 @@ import * as httpStatus from "_/helpers/http-helpers";
 import { mapBodyToTotem } from "_/helpers/map-body-to-totem";
 import { Totem, TotemDto } from "_/models";
 import { HttpRequest, HttpResponse, Controller, IDatabaseRepository, HttpRequestParams } from "_/types";
+import { validateFields } from "_/validation/fields-validation";
 import { DeleteTotemParams, FindTotemParams, ListTotemQuery, TotemHeaders } from "./types";
 
 export class TotemController implements Controller<TotemController>{
@@ -12,6 +13,16 @@ export class TotemController implements Controller<TotemController>{
     async createTotem(httpRequest: HttpRequest<TotemDto, TotemHeaders>): Promise<HttpResponse>{
         try {
             const { email } = httpRequest.headers
+
+            const requiredFields: Array<keyof TotemDto> = ["is_active", "name", "mac_address", "location"]
+            const fields = Object.keys(httpRequest.body)
+
+            const validationResponse = validateFields({ requiredFields, fields })
+
+            if(!validationResponse.valid){
+                return httpStatus.badRequest(new Error(validationResponse.message))
+            }
+
             await this.totemDatabaseRepository.create(mapBodyToTotem(httpRequest.body, email));
             return httpStatus.created();
         } catch(error){

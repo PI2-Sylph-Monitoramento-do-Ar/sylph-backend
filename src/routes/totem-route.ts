@@ -13,7 +13,7 @@ export function setTotemRoutes (router: Router){
     const authMiddleware = new AuthMiddleware() 
 
     // ROUTES
-    router.post('/totems', adaptMiddleware(authMiddleware), adaptRoute(totemControtroller.createTotem, totemControtroller))
+    router.post('/totems', adaptRoute(totemControtroller.createTotem, totemControtroller))
     router.delete('/totems/:totem_id', adaptMiddleware(authMiddleware), adaptRoute(totemControtroller.deleteTotem, totemControtroller))
 
     router.get('/totems', adaptRoute(totemControtroller.listTotem, totemControtroller))
