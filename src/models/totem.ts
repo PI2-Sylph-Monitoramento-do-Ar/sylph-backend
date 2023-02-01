@@ -2,7 +2,7 @@ import { Model } from "_/types"
 
 interface Location {
     latitude: number; 
-    longitute: number;
+    longitude: number;
 }
 export interface Totem  extends Model {
     mac_address: string,

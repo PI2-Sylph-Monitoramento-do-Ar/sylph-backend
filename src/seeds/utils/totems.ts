@@ -6,7 +6,7 @@ const totem1_data = {
     email: "test@test.com",
     id: genereateId(), 
     is_active: true, 
-    location: { latitude: -16.0138479, longitute:  -48.0825750 }, 
+    location: { latitude: -16.0138479, longitude:  -48.0825750 }, 
     mac_address: "mac_address_1"
 }
 const totem2_data = {
@@ -14,7 +14,7 @@ const totem2_data = {
     email: "test3@test.com",
     id: genereateId(), 
     is_active: true, 
-    location: { latitude: -16.0238479, longitute:  -48.0925750 }, 
+    location: { latitude: -16.0238479, longitude:  -48.0925750 }, 
     mac_address: "mac_address_1"
 }
 const totem3_data = {
@@ -22,7 +22,7 @@ const totem3_data = {
     email: "test3@test.com",
     id: genereateId(), 
     is_active: true, 
-    location: { latitude: -16.0338479, longitute:  -48.0525750 }, 
+    location: { latitude: -16.0338479, longitude:  -48.0525750 }, 
     mac_address: "mac_address_1"
 }
 
