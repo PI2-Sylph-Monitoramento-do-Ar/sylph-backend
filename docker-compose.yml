@@ -1,0 +1,39 @@
+version: '3'
+
+services: 
+  api:
+    build: .
+    command: yarn dev
+    links: 
+      - mongo
+    depends_on: 
+      - mongo
+    ports: 
+      - "5050:5050"
+      - "9222:9222"
+    volumes: 
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    env_file:
+      - .env
+  mongo:
+    restart: always 
+    image: mongo:4.2.9-bionic
+    ports:
+      - '27017:27017'
+    volumes:
+      - ./mongo:/data/db
+      
+  mqtt_broker:
+    container_name: mqtt_broker
+    image: emqx/emqx
+    ports:
+      - 1883:1883
+      - 8081:8081
+      - 8083:8083
+      - 8084:8084
+      - 8883:8883
+      - 18083:18083
+    environment:
+      - EMQX_NAME=mqtt_broker
+      - EMQX_HOST=localhost
