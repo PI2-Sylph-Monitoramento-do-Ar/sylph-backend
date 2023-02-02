@@ -1,4 +1,5 @@
 import { Measurement, MeasurementMqttDTO } from "_/models";
+import { tryParseNumber } from "_/utils/try-parse-number";
 import _ from "lodash"
 
 export const mapMqttToMeasurement = (measurementDto: MeasurementMqttDTO): Measurement => {
@@ -33,9 +34,4 @@ export const mapMqttToMeasurement = (measurementDto: MeasurementMqttDTO): Measur
     }
 
     return _.omitBy(measurement, _.isNil) as Measurement
-}
-
-const tryParseNumber = (number?: string) => {
-    if(!number) return null
-    return Number(number)
 }
