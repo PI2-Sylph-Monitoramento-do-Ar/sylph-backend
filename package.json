@@ -18,7 +18,8 @@
     "dev": "nodemon -e ts,js --exec ts-node -r tsconfig-paths/register src/server.ts",
     "lint": "eslint . --ext .ts",
     "seed": "tsc && tsc-alias && node dist/src/seeds/index.js", 
-    "start": "tsc && tsc-alias && node dist/src/server.js",
+    "build": "tsc && tsc-alias",
+    "start": "node dist/src/server.js",
     "prestart": "chmod 755 deploy.sh && ./deploy.sh "
   },
   "devDependencies": {
