@@ -20,7 +20,7 @@
     "seed": "tsc && tsc-alias && node dist/src/seeds/index.js", 
     "build": "tsc && tsc-alias",
     "start": "node dist/src/server.js",
-    "prestart": "chmod 755 deploy.sh && ./deploy.sh "
+    "prebuild": "chmod 755 deploy.sh && ./deploy.sh "
   },
   "devDependencies": {
     "@types/express": "^4.17.15",
