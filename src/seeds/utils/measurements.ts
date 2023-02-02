@@ -12,8 +12,12 @@ export const gerenerateMeasurements  = (totem: Totem): Measurement[] => {
             date_time: new Date(), 
             humidity: Math.random() * 100, 
             nitrogen_dioxide_level: Math.random() * 10, 
-            particulate_matter_level: true, 
-            temperature: Math.floor(Math.random() * 40)
+            particulate_matter_level: Math.random() * 10, 
+            temperature: Math.floor(Math.random() * 40),
+            altitude:  Math.random() * 10,
+            ammonia: Math.random() * 10,
+            carbon_dioxide_level: Math.random() * 10,
+            pressure:  Math.random() * 10
         })
     }
     return measurements

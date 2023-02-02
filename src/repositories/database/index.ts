@@ -1,6 +1,6 @@
 import { Collection } from "mongodb";
 import { Database } from "_/config/database";
-import { IDatabaseRepository, Model } from "_/types";
+import { IDatabaseRepository, Model, UpdateConfig } from "_/types";
 
 export class DatabaseRepository implements IDatabaseRepository {
     private databaseSingleton = Database.getInstance()
@@ -30,8 +30,10 @@ export class DatabaseRepository implements IDatabaseRepository {
         await this.collection.insertOne(data)
     }
 
-    async update<T extends Model>(id: string, data: Partial<T>){
-        await this.collection.updateOne({ id }, data)
+    async update<T extends Model>(id: string, data: Partial<T>, config: UpdateConfig){
+        await this.collection.updateOne({ id }, { $set: data }, {
+            upsert: config.createItNotExists
+        })
     }
 
     async delete(id: string): Promise<void>{

@@ -11,7 +11,11 @@ export const mapBodyToMeasurement = (body: MeasurementDto): Measurement => {
             date_time,
             carbon_monoxide_level,
             nitrogen_dioxide_level,
-            particulate_matter_level
+            particulate_matter_level,
+            altitude, 
+            ammonia, 
+            carbon_dioxide_level, 
+            pressure
         } = body;
     return {
         id: id || genereateId(),
@@ -21,6 +25,10 @@ export const mapBodyToMeasurement = (body: MeasurementDto): Measurement => {
         date_time,
         carbon_monoxide_level,
         nitrogen_dioxide_level,
-        particulate_matter_level
+        particulate_matter_level,
+        altitude, 
+        ammonia, 
+        carbon_dioxide_level, 
+        pressure
     }
 }
