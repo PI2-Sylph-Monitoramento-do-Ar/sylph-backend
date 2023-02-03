@@ -8,6 +8,7 @@ const envSchema = z.object({
   MQTT_PROTOCOL: z.string().regex(/(mqtt|mqtts)/g),
   MQTT_USERNAME: z.string(), 
   MQTT_PASSWORD: z.string(),
+  MQTT_METRICS_TOPIC: z.string()
 })
 
 const parsedEnv = envSchema.parse(process.env)
@@ -21,4 +22,5 @@ export const envs =  {
     mqttProtocol: parsedEnv.MQTT_PROTOCOL as MqttProtocol,
     mqttUsername: parsedEnv.MQTT_USERNAME,
     mqttPassword: parsedEnv.MQTT_PASSWORD,
+    mqttMetricsTopic: parsedEnv.MQTT_METRICS_TOPIC
   }
