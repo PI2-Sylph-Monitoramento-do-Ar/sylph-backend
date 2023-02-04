@@ -2,13 +2,16 @@ import * as httpStatus from "_/helpers/http-helpers";
 import { mapBodyToMeasurement } from "_/helpers/map-body-to-measurement";
 import { HttpRequest, HttpResponse, Controller, IDatabaseRepository, HttpRequestParams } from "_/types";
 import { Measurement, MeasurementDto, Totem } from "_/models"
-import {FindMeasurementQuery} from './types'
+import { FindMeasurementQuery, GetCsvParams } from './types'
+import { JsonToCsvAdapter } from "_/adapters";
+import { File } from "_/types"
 
 export class MeasurementController implements Controller<MeasurementController> {
 
     constructor(
         private readonly measurementDatabaseRepository: IDatabaseRepository,
         private readonly totemDatabaseRepository: IDatabaseRepository,
+        private readonly jsonToCsv: JsonToCsvAdapter
     ){}
 
     async createMeasurement(httpRequest: HttpRequest<MeasurementDto>): Promise<HttpResponse> {
@@ -30,6 +33,20 @@ export class MeasurementController implements Controller<MeasurementController> 
             const query = httpParams.query
             const measurements = await this.measurementDatabaseRepository.findAll<Measurement>(query);
             return httpStatus.ok(measurements)
+        } catch(error){
+            return httpStatus.serverError(error)
+        }
+    }
+
+    async getCsv(_: HttpRequest, httpParams: HttpRequestParams<GetCsvParams>): Promise<HttpResponse<File | Error>>  {
+        try {
+            const { totem_id } = httpParams.params
+
+            const measurements = await this.measurementDatabaseRepository.findAll<Measurement>({ totem_id });
+            const csvData = this.jsonToCsv.convert(measurements)
+
+            return httpStatus.ok<File>({data: csvData, filename: "measurements.csv"})
+            
         } catch(error){
             return httpStatus.serverError(error)
         }
