@@ -2,14 +2,14 @@ import { NextFunction, Response, Request } from "express"
 import { HttpRequest } from "_/types"
 import { Middleware } from "_/types/middleware"
 
-export const adaptMiddleware = (middleware: Middleware) => {
-    return async (req: Request, res: Response, next: NextFunction): Promise<void> => {
-     
+export class MiddlewareAdapter {
+  handle(middleware: Middleware){
+    return async (req: Request, res: Response, next: NextFunction) => {
       const httpRequest: HttpRequest = {
         headers: req.headers
       }
-
       const httpResponse = await middleware.handle(httpRequest)
+      
       if (httpResponse.statusCode === 200) {
         Object.assign(req.headers, httpResponse.body)
         next()
@@ -20,3 +20,4 @@ export const adaptMiddleware = (middleware: Middleware) => {
       }
     }
   }
+}

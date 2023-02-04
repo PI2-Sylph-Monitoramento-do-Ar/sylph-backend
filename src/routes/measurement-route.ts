@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { adaptFileRoute, adaptRoute, JsonToCsv } from "_/adapters";
+import { RouteAdapter, RouteFileAdatper, JsonToCsv } from "_/adapters";
 import { COLLECTIONS } from "_/constants/colletions";
 import { CreateMeasurementController, GetMeasurementCsvController, ListMeasurementController } from "_/controllers/measurement-controllers";
 import { DatabaseRepository } from "_/repositories/database";
@@ -13,8 +13,11 @@ export function setMeasurementRoutes (router: Router){
     const getCsvController = new GetMeasurementCsvController(measurementDatabaseRepository, jsonToCsv)
     const listMeasurementController = new ListMeasurementController(measurementDatabaseRepository)
 
+    const routeAdapter = new RouteAdapter()
+    const routeFileAdapter = new RouteFileAdatper()
+
     // ROUTES
-    router.get('/measurements', adaptRoute(listMeasurementController))
-    router.post('/measurements', adaptRoute(createMeasurementController))
-    router.get('/measurements/csv/:totem_id', adaptFileRoute(getCsvController))
+    router.get('/measurements', routeAdapter.handle(listMeasurementController))
+    router.post('/measurements', routeAdapter.handle(createMeasurementController))
+    router.get('/measurements/csv/:totem_id', routeFileAdapter.handle(getCsvController))
 }
