@@ -26,7 +26,7 @@ export const adaptFileRoute = (controller: Controller) => {
 
     if (httpResponse.statusCode >= 200 && httpResponse.statusCode <= 299) {
         res.set({
-            "Content-Type": "text/csv",
+            "Content-Type": httpResponse.body.fileType,
             "Content-Disposition": `attachment; filename="${httpResponse.body.filename}"`,
         }).send(httpResponse.body.data)
     } else {

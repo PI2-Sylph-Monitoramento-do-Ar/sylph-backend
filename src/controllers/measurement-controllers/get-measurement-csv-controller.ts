@@ -19,7 +19,11 @@ export class GetMeasurementCsvController implements Controller {
             const measurements = await this.measurementDatabaseRepository.findAll<Measurement>({ totem_id });
             const csvData = this.jsonToCsv.convert(measurements)
 
-            return httpStatus.ok<FileResponse>({data: csvData, filename: "measurements.csv"})
+            return httpStatus.ok<FileResponse>({ 
+                data: csvData, 
+                filename: "measurements.csv", 
+                fileType: "text/csv"
+            })
             
         } catch(error){
             return httpStatus.serverError(error)

@@ -1,1 +1,5 @@
-export type FileResponse = { data: string, filename: string }
+export type FileResponse = { 
+    data: string, 
+    filename: string,
+    fileType: string
+}
