@@ -1,4 +1,4 @@
-export type HttpResponse<R = object> = {
+export type HttpResponse<R = any> = {
     statusCode: number
     body: R
 }

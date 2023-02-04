@@ -6,6 +6,7 @@
   "author": "GabrielDvPereira <gdavi.gd@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "@json2csv/plainjs": "^6.1.2",
     "@types/lodash": "^4.14.191",
     "express": "^4.18.2",
     "firebase-admin": "^11.5.0",
@@ -19,7 +20,7 @@
   "scripts": {
     "dev": "nodemon -e ts,js --exec ts-node -r tsconfig-paths/register src/server.ts",
     "lint": "eslint . --ext .ts",
-    "seed": "tsc && tsc-alias && node dist/src/seeds/index.js", 
+    "seed": "tsc && tsc-alias && node dist/src/seeds/index.js",
     "build": "tsc && tsc-alias",
     "start": "node dist/src/server.js",
     "prebuild": "chmod 755 deploy.sh && ./deploy.sh "

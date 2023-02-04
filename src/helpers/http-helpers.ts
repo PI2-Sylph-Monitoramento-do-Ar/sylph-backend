@@ -20,7 +20,7 @@ export const unauthorized = (): HttpResponse<Error> => ({
   body: new UnauthorizedError()
 })
 
-export const ok = (data: object): HttpResponse => ({
+export const ok = <T = object>(data: T): HttpResponse<T> => ({
   statusCode: 200,
   body: data
 })
