@@ -2,13 +2,13 @@ import { AccessDeniedError } from "_/errors";
 import * as httpStatus from "_/helpers/http-helpers";
 import { Totem } from "_/models";
 import { HttpRequest, HttpResponse, Controller, IDatabaseRepository, HttpRequestParams } from "_/types";
-import { DeleteTotemParams, TotemHeaders } from "./types";
+import { DeleteTotemParams, TotemAuthHeaders } from "./types";
 
 export class DeleteTotemController implements Controller {
     
     constructor(private readonly totemDatabaseRepository: IDatabaseRepository){}
 
-    async handle(httpRequest: HttpRequest<null, TotemHeaders>, httpParams: HttpRequestParams<DeleteTotemParams>): Promise<HttpResponse> {
+    async handle(httpRequest: HttpRequest<null, TotemAuthHeaders>, httpParams: HttpRequestParams<DeleteTotemParams>): Promise<HttpResponse> {
         try {
             const { totem_id } = httpParams.params  
             const { email } = httpRequest.headers   
