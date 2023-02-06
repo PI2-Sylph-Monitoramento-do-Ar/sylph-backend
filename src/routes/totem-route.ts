@@ -22,7 +22,7 @@ export function setTotemRoutes (router: Router){
 
 
     // ROUTES
-    router.post('/totems', routeAdapter.handle(createTotemController))
+    router.post('/totems', middlewareAdapter.handle(authMiddleware), routeAdapter.handle(createTotemController))
     router.patch('/totems/:totem_id', middlewareAdapter.handle(authMiddleware), routeAdapter.handle(updateTotemController))
     router.delete('/totems/:totem_id', middlewareAdapter.handle(authMiddleware) , routeAdapter.handle(deleteTotemController))
     router.get('/totems', routeAdapter.handle(listTotemController))
