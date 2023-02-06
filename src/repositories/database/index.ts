@@ -30,9 +30,9 @@ export class DatabaseRepository implements IDatabaseRepository {
         await this.collection.insertOne(data)
     }
 
-    async update<T extends Model>(id: string, data: Partial<T>, config: UpdateConfig){
+    async update<T extends Model>(id: string, data: Partial<T>, config?: UpdateConfig){
         await this.collection.updateOne({ id }, { $set: data }, {
-            upsert: config.createItNotExists
+            upsert: config?.createItNotExists ?? false
         })
     }
 
