@@ -3,13 +3,13 @@ import { mapBodyToTotem } from "_/helpers/map-body-to-totem";
 import { TotemDto } from "_/models";
 import { HttpRequest, HttpResponse, Controller, IDatabaseRepository } from "_/types";
 import { validateFields } from "_/validation/fields-validation";
-import {  TotemHeaders } from "./types";
+import {  TotemAuthHeaders } from "./types";
 
 export class CreateTotemController implements Controller{
     
     constructor(private readonly totemDatabaseRepository: IDatabaseRepository){}
 
-    async handle(httpRequest: HttpRequest<TotemDto, TotemHeaders>): Promise<HttpResponse>{
+    async handle(httpRequest: HttpRequest<TotemDto, TotemAuthHeaders>): Promise<HttpResponse>{
         try {
             const { email } = httpRequest.headers
 

@@ -4,7 +4,11 @@ export type DeleteTotemParams = {
     totem_id: string
 }
 
-export type TotemHeaders = {
+export type UpdateTotemParams = {
+    totem_id: string
+}
+
+export type TotemAuthHeaders = {
     email: string 
 }
 
