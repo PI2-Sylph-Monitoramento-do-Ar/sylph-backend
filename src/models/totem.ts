@@ -13,6 +13,7 @@ export interface Totem  extends Model {
 }
 
 export type TotemDto = {
+    id?: string,
     mac_address: string,
     is_active: boolean,
     location: Location,

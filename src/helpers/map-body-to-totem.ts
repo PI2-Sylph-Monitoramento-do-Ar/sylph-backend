@@ -4,10 +4,10 @@ import { genereateId } from "./generate-id";
 import _ from "lodash";
 
 export const mapBodyToTotem = (body: TotemDto, email: string): Totem => {
-    const { mac_address, location, is_active, name } = body;
+    const { mac_address, location, is_active, name, id } = body;
     return {
         name,
-        id: genereateId(),
+        id: id ?? genereateId(),
         mac_address,
         location,
         is_active, 
