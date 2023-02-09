@@ -6,7 +6,6 @@ import { envs } from "_/config/env";
 import { setMeasurementRoutes } from '_/routes';
 import { setTotemRoutes } from './routes/totem-route';
 import { setMqttServices } from './services';
-import { setPrevisionService } from './services/prevision/setup';
 
 
 export class App {
@@ -41,7 +40,6 @@ export class App {
 
     setServices(){
         setMqttServices()
-        setPrevisionService()
     }
 }
 

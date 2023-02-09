@@ -7,15 +7,9 @@ export class PrevisionService implements IPrevisionService {
         private readonly api: HttpsAdapterType,
     ) { }
 
-    public static getInstance(api?: HttpsAdapterType){
-        if(!PrevisionService.instance){
-            PrevisionService.instance = new PrevisionService(api);
-        }
-        return PrevisionService.instance;
-    }
-
     async getPrevision(nextSixHourHistory: Array<number>) {
         const response = await this.api.post('/prediction', {hour_history: nextSixHourHistory})
+        console.log(`response: ${response}`)
         return response as number;
     }
 }
