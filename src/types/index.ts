@@ -4,3 +4,4 @@ export * from "./http"
 export * from "./model"
 export * from "./mqtt-service"
 export * from "./file-response"
+export * from './prevision-service'
