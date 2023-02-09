@@ -22,7 +22,7 @@ export const gerenerateMeasurements  = (totem: Totem): Measurement[] => {
             temperature: Math.floor(Math.random() * 40),
             altitude:  Math.random() * 10,
             ammonia: Math.random() * 10,
-            carbon_dioxide_level: Math.random() * 10,
+            ozone_level: Math.random() * 10,
             pressure:  Math.random() * 10
         })
     }
