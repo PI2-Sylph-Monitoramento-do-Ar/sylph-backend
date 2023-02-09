@@ -6,7 +6,7 @@ export interface Measurement extends Model {
     temperature?: number,
     humidity?: number,
     carbon_monoxide_level?: number,
-    carbon_dioxide_level?: number,
+    ozone_level?: number,
     nitrogen_dioxide_level?: number,
     particulate_matter_level?: number
     pressure?: number
@@ -31,7 +31,7 @@ export type MeasurementDto = {
 }
 
 export type MeasurementMqttDTO = {
-    co2?: string
+    o3?: string
     smoke?: string
     temperature?: string
     pressure?: string
