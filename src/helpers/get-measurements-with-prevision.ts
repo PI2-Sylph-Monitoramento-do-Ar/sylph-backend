@@ -13,7 +13,6 @@ export const getMeasurementsWithPrevision = async (measurements: Array<Measureme
     for(const hour in nextSixHours){
         const stringHour = hour.toString().padStart(2, '0')
         const nextMeasurement = measurementByHour[stringHour].length > 0? await previsionService.getPrevision(measurementByHour[stringHour]) : -1
-        console.log(nextMeasurement)
         previsions[stringHour] = nextMeasurement
     }
     return {
