@@ -14,7 +14,7 @@ export const mapBodyToMeasurement = (body: MeasurementDto): Measurement => {
             particulate_matter_level,
             altitude, 
             ammonia, 
-            carbon_dioxide_level, 
+            ozone_level, 
             pressure
         } = body;
     return {
@@ -28,7 +28,7 @@ export const mapBodyToMeasurement = (body: MeasurementDto): Measurement => {
         particulate_matter_level,
         altitude, 
         ammonia, 
-        carbon_dioxide_level, 
+        ozone_level, 
         pressure
     }
 }
