@@ -18,13 +18,13 @@ export class ListPrevisionsController implements Controller {
             const measurements = await this.measurementDatabaseRepository.findAll<Measurement>(query);
             const measurementByHour = mapMeasurementByHours(measurements)
             const nextSixHours = getNextSixHours()
-            const previsions = {}
+            const previsions = []
             for(const hour in nextSixHours){
                 const stringHour = hour.toString().padStart(2, '0')
                 const nextMeasurement = measurementByHour[stringHour].length > 0? await this.previsionService.getPrevision(measurementByHour[stringHour]) : -1
-                previsions[stringHour] = nextMeasurement
+                previsions.push(nextMeasurement)
             }
-            return httpStatus.ok(previsions)
+            return httpStatus.ok({previsions, nextSixHours})
         } catch(error){
             return httpStatus.serverError(error)
         }
