@@ -9,7 +9,6 @@ export class PrevisionService implements IPrevisionService {
 
     async getPrevision(nextSixHourHistory: Array<number>) {
         const response = await this.api.post('/prediction', {hour_history: nextSixHourHistory})
-        console.log(`response: ${response}`)
         return response as number;
     }
 }
