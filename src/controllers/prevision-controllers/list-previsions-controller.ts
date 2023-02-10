@@ -26,6 +26,7 @@ export class ListPrevisionsController implements Controller {
             }
             return httpStatus.ok({previsions, nextSixHours})
         } catch(error){
+            console.error(error)
             return httpStatus.serverError(error)
         }
     }
