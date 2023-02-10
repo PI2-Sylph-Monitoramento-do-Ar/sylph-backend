@@ -2,7 +2,6 @@ import * as httpStatus from "_/helpers/http-helpers";
 import { HttpRequest, HttpResponse, Controller, IDatabaseRepository, HttpRequestParams } from "_/types";
 import { Measurement } from "_/models"
 import { FindMeasurementQuery } from './types'
-import { getMeasurementsWithPrevision } from "_/helpers/get-measurements-with-prevision";
 
 export class ListMeasurementController implements Controller {
     constructor(
@@ -14,7 +13,7 @@ export class ListMeasurementController implements Controller {
         try {
             const query = httpParams.query
             const measurements = await this.measurementDatabaseRepository.findAll<Measurement>(query);
-            return httpStatus.ok(await getMeasurementsWithPrevision(measurements))
+            return httpStatus.ok(measurements)
         } catch(error){
             return httpStatus.serverError(error)
         }

@@ -1,5 +1,5 @@
 export const getNextSixHours = () => {
-    let date = new Date()
+    const date = new Date()
     const nextSixHours = []
     for(let i=0; i<6; i++){
         date.setHours(date.getHours() + 1)
