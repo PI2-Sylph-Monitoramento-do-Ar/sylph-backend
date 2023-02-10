@@ -6,6 +6,7 @@ import { envs } from "_/config/env";
 import { setMeasurementRoutes } from '_/routes';
 import { setTotemRoutes } from './routes/totem-route';
 import { setMqttServices } from './services';
+import { setPrevisionsRoutes } from './routes/prevision-route';
 
 
 export class App {
@@ -36,6 +37,7 @@ export class App {
         this.app.use('/api', router)
         setMeasurementRoutes(router)
         setTotemRoutes(router)
+        setPrevisionsRoutes(router)
     }
 
     setServices(){
