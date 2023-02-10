@@ -12,6 +12,7 @@ export class MeasurementMqttService implements MqttService{
     
     async watch(){
         this.mqttMeasurement.onMessage<MeasurementMqttDTO>(async (data) => {
+            console.log(data)
             const measurement = mapMqttToMeasurement(data)
 
             const totem = await this.totemDatabaseRepository.findOne({ id: measurement.totem_id })
@@ -20,7 +21,7 @@ export class MeasurementMqttService implements MqttService{
                 return
             }
             await this.measurementDatabaseRepository.update<Measurement>(measurement.id, measurement, { createItNotExists: true })
-            console.log("measurement added.", data)
+            // console.log("measurement added.", data)
         })        
     }
 }
