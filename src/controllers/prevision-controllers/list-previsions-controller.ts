@@ -16,18 +16,25 @@ export class ListPrevisionsController implements Controller {
         try {
             const query = httpParams.query
             const measurements = await this.measurementDatabaseRepository.findAll<Measurement>(query);
-            const measurementByHour = mapMeasurementByHours(measurements)
             const nextSixHours = getNextSixHours()
-            const previsions = []
-            for(const hour in nextSixHours){
-                const stringHour = hour.toString().padStart(2, '0')
-                const nextMeasurement = measurementByHour[stringHour].length > 0? await this.previsionService.getPrevision(measurementByHour[stringHour]) : -1
-                previsions.push(nextMeasurement)
-            }
-            return httpStatus.ok({previsions, nextSixHours})
+            const previsions = await this.calculatePrevisions(measurements, nextSixHours)
+
+            return httpStatus.ok({ previsions, nextSixHours })
         } catch(error){
             console.error(error)
             return httpStatus.serverError(error)
+        }
+    }
+
+    private async calculatePrevisions(measurements: Measurement[], nextSixHours: number[] ){
+        const measurementByHour = mapMeasurementByHours(measurements)
+
+        const response = []
+        for(const hour in nextSixHours){
+            const stringHour = hour.toString().padStart(2, '0')
+            const prevision = await this.previsionService.getPrevision(measurementByHour[stringHour])
+            const nextMeasurement = measurementByHour[stringHour].length > 0 ?  prevision : -1
+            response.push(nextMeasurement)
         }
     }
 }
